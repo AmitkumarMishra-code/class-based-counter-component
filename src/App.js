@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import Counter from './Counter';
 import CounterClassComponent from './CounterClassComponent';
 
 function App() {
