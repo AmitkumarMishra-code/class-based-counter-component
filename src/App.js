@@ -1,25 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useEffect, useState } from 'react';
+import Counter from './Counter';
+import CounterClassComponent from './CounterClassComponent';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    let [mount, setMounted] = useState(false);
 
-export default App;
+    console.log('rendered App');
+
+    useEffect(() => {
+        let logResize = () => {
+            console.log('resized');
+        };
+
+        window.addEventListener('resize', logResize);
+
+        return () => window.removeEventListener('resize', logResize)
+    }, [mount]);
+
+    return ( < div className = "App" > {
+            mount && < CounterClassComponent title = { 'HelloWorld' }
+            /> }  <
+            button onClick = {
+                () => setMounted(mount => !mount)
+            } > Toggle Mount < /button> < /
+            div >
+        );
+    }
+
+    export default App;
